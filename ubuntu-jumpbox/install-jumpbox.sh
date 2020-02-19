@@ -48,17 +48,17 @@ else
     echo "no hostname to set\n"
 fi
 
-# Register User via CLI
-sudo remoteit login $username $password
-#register ssh and jumboxui
-sudo remoteit add jumpboxui 29999 -t 7
-sudo remoteit add ssh 22 -t 28 
-
 # insdtall desktop
 wget https://github.com/remoteit/desktop/releases/latest/download/remoteit-desktop-headless.tgz
-tar -xvzf remoteit-desktop-headless.tgz
-cd package
+tar -xvzf remoteit-desktop-headlesss.tgz
+sudo mv package /opt/remoteit-desktop-headless
+cd /opt/package
 
+# Register User via CLI
+/usr/local/bin/remoteit login $username $password
+#register ssh and jumboxui
+/usr/local/bin/remoteit add jumpboxui 29999 -t 7
+/usr/local/bin/remoteit add ssh 22 -t 28 
 
 # set it to boot, first build a systemd file for this service
 
@@ -73,8 +73,8 @@ User=root
 Group=root
 Restart=always
 KillSignal=SIGQUIT
-WorkingDirectory=/home/ubuntu/remoteit-desktop/package
-ExecStart=/usr/bin/node /home/ubuntu/remoteit-desktop/package/build/index.js
+WorkingDirectory=/opt/remoteit-desktop-headless/package
+ExecStart=/usr/bin/node /opt/remoteit-desktop-headless/package/build/index.js
 StandardOutput=null
 
 [Install]
