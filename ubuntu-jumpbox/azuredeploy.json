@@ -68,10 +68,10 @@
           "description": "Remote.it Password that belonge to Remote.it Username entered above."
         }
       },       
-      "RemoteitName": {
+      "RemoteitDeviceName": {
         "type": "string",
         "metadata": {
-          "description": "Remote.it device name to call the Remote.i jumpbox."
+          "description": "Remote.it device name to call this Remote.it jumpbox."
         }
       }             
     },
@@ -207,7 +207,7 @@
       {
         "apiVersion": "2017-03-30",
         "type": "Microsoft.Compute/virtualMachines",
-        "name": "[parameters('RemoteitName')]",
+        "name": "[parameters('RemoteitDeviceName')]",
         "location": "[parameters('location')]",
         "dependsOn": [
           "[concat('Microsoft.Storage/storageAccounts/', parameters('storageAccountNamePrefix'))]",
@@ -218,7 +218,7 @@
             "vmSize": "[variables('vmSize')]"
           },
           "osProfile": {
-            "computerName": "[parameters('RemoteitName')]",
+            "computerName": "[parameters('RemoteitDeviceName')]",
             "adminUsername": "[parameters('adminUsername')]",
             "adminPassword": "[parameters('adminPasswordOrKey')]",
             "linuxConfiguration": "[if(equals(parameters('authenticationType'), 'password'), json('null'), variables('linuxConfiguration'))]"
@@ -231,7 +231,7 @@
               "version": "latest"
             },
             "osDisk": {
-              "name": "[concat(parameters('RemoteitName'),'_OSDisk')]",
+              "name": "[concat(parameters('RemoteitDeviceName'),'_OSDisk')]",
               "caching": "ReadWrite",
               "createOption": "FromImage"
             }
@@ -247,11 +247,11 @@
       },
       {
         "type": "Microsoft.Compute/virtualMachines/extensions",
-        "name": "[concat(parameters('RemoteitName'),'/newuserscript')]",
+        "name": "[concat(parameters('RemoteitDeviceName'),'/newuserscript')]",
         "apiVersion": "2015-06-15",
         "location": "[parameters('location')]",
         "dependsOn": [
-          "[concat('Microsoft.Compute/virtualMachines/', parameters('RemoteitName'))]"
+          "[concat('Microsoft.Compute/virtualMachines/', parameters('RemoteitDeviceName'))]"
         ],
         "properties": {
           "publisher": "Microsoft.Azure.Extensions",

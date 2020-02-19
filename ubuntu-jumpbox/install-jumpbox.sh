@@ -26,8 +26,8 @@ sudo apt-get -y update
 sudo apt-get -y upgrade 
 
 #make a directory for the install
-mkdir remoteit-desktop
-cd remoteit-desktop
+#mkdir remoteit-desktop
+#cd remoteit-desktop
 
 #
 if [ !install_node ]; then
@@ -45,24 +45,31 @@ if [ ${#hosthane} -ge 1 ]; then
     # hostname has length, set hostname
     sudo hostnamectl set-hostname $hostname
 else
+    logger "no hostname to set\n"
     echo "no hostname to set\n"
 fi
 
-# insdtall desktop
-wget https://github.com/remoteit/desktop/releases/latest/download/remoteit-desktop-headless.tgz
-tar -xvzf remoteit-desktop-headlesss.tgz
+# insstall desktop
+logger "install desktop"
+touch /tmp/installdesktop
+touch /opt/t
+cd /root
+sudo wget https://github.com/remoteit/desktop/releases/latest/download/remoteit-desktop-headless.tgz
+sudo tar -xvzf remoteit-desktop-headlesss.tgz
 sudo mv package /opt/remoteit-desktop-headless
-cd /opt/package
+sudo cd /opt/package
 
 # Register User via CLI
-/usr/local/bin/remoteit login $username $password
+logger "Register Device with cli"
+touch /tmp/registercli
+sudo /usr/local/bin/remoteit login $username $password
 #register ssh and jumboxui
-/usr/local/bin/remoteit add jumpboxui 29999 -t 7
-/usr/local/bin/remoteit add ssh 22 -t 28 
+sudo /usr/local/bin/remoteit add jumpboxui 29999 -t 7
+sudo /usr/local/bin/remoteit add ssh 22 -t 28 
 
 # set it to boot, first build a systemd file for this service
 
-echo '
+sudo echo '
 [Unit]
 Description=Remoteit Headless Desktop
 After=network.target
@@ -87,6 +94,8 @@ cp remoteit-headless-desktop.service /etc/systemd/system/remoteit-headless-deskt
 sudo systemctl enable remoteit-headless-desktop.service
 sudo systemctl start remoteit-headless-desktop.service
 
+t=$(pwd)
+logger $t
 # 
 
 
