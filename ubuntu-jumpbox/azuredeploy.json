@@ -6,19 +6,19 @@
         "type": "string",
         "maxLength": 11,
         "metadata": {
-          "description": "Name prefix of the Storage Account"
+          "description": "Name prefix of the Azure Storage Account"
         }
       },
       "adminUsername": {
         "type": "string",
         "metadata": {
-          "description": "User name for the Virtual Machine."
+          "description": "User name for the Jumpbox Virtual Machine."
         }
       },
       "dnsLabelPrefix": {
         "type": "string",
         "metadata": {
-          "description": "DNS Label for the Public IP. Must be lowercase. It should match with the following regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$ or it will raise an error."
+          "description": "DNS Label for the Public IP (May not be used if never public). Must be lowercase. It should match with the following regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$ or it will raise an error."
         }
       },
       "ubuntuOSVersion": {
