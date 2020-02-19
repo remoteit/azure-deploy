@@ -6,6 +6,10 @@ username=$1
 password=$2
 hostname=$3
 
+logger "username $username"
+logger "pw $password"
+logger "hostname $hostname"
+
 install_node()
 {
     local ret=0
@@ -13,8 +17,8 @@ install_node()
   #  if ! dpkg -s nodejs >/dev/null 2>&1; then
         logger "install node.js"
         curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
-        apt-get install -y nodejs
-        apt-get install -y build-essential
+        apt install -y nodejs
+        apt install -y build-essential
   #  else
   #      logger "nodejs already installed\n"           
   #      ret=1
@@ -26,6 +30,10 @@ install_node()
 logger "do update"
 sudo apt-get -y update
 sudo apt-get -y upgrade 
+logger "install node.js"
+sudo curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+sudo apt install -y nodejs
+sudo apt install -y build-essential
 sleep 1
 
 #make a directory for the install
@@ -34,7 +42,7 @@ sleep 1
 
 #
 logger "try to install node"
-if [ !install_node ]; then
+if [ install_node ]; then
     logger "node already installed\n"
 fi
 
@@ -47,7 +55,7 @@ sudo chmod +x /usr/local/bin/remoteit
 
 #
 # Set hostname if passed
-if [ ${#hosthane} -ge 1 ]; then 
+if [ ${#hostname} -ge 1 ]; then 
     # hostname has length, set hostname
     sudo hostnamectl set-hostname $hostname
 else
