@@ -1,9 +1,9 @@
 {
     "$schema": "https://aka.ms/azure-quickstart-templates-metadata-schema#",
-    "type": "Jumpbox,
-    "itemDisplayName": "Deploy a Remote.it Jumpbox on (commandline) buntu",
-    "description": "This template uses the Azure Linux CustomScript extension to deploy a remote.it Jumpbox on ubuntu OS. It creates an Ubuntu VM, does a silent install of redis, openresty, Apache and PHP, then creates a simple PHP script.",
-    "summary": "Deploy a remote.it Jumpbox server on Ubuntu",
+    "type": "Application",
+    "itemDisplayName": "Deploy a Remote.it Jumpbox on (commandline) ubuntu",
+    "description": "This template uses the Azure Linux CustomScript extension to deploy a remote.it Headless Jumpbox on ubuntu OS.",
+    "summary": "Deploy a remote.it Headless Jumpbox on Ubuntu at Azure",
     "githubUsername": "lowerpower",
     "dateUpdated": "2020-02-19"
   }
