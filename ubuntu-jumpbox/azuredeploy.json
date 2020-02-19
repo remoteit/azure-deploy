@@ -82,7 +82,7 @@
       "publicIPAddressType": "Dynamic",
       "vmStorageAccountContainerName": "vhds",
       "vmName": "MyUbuntuVM",
-      "vmSize": "Standard_B1",
+      "vmSize": "Standard_B1s",
       "virtualNetworkName": "MyVNET",
       "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnetName'))]",
       "networkSecurityGroupName": "default-NSG",
