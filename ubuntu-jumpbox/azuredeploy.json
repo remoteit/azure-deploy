@@ -84,8 +84,6 @@
       "vmName": "MyUbuntuVM",
       "vmSize": "Standard_B1",
       "virtualNetworkName": "MyVNET",
-      "RemoteitUsername" : "replace-default",
-      "RemoteitPassword" : "replace-default",
       "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnetName'))]",
       "networkSecurityGroupName": "default-NSG",
       "linuxConfiguration": {
