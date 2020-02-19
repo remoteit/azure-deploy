@@ -248,7 +248,7 @@
       {
         "type": "Microsoft.Compute/virtualMachines/extensions",
         "name": "[concat(parameters('RemoteitName'),'/newuserscript')]",
-        "apiVersion": "2015-06-15",
+        "apiVersion": "2019-07-01",
         "location": "[parameters('location')]",
         "dependsOn": [
           "[concat('Microsoft.Compute/virtualMachines/', parameters('RemoteitName'))]"
@@ -264,7 +264,7 @@
             ]
           },
           "protectedSettings": {
-            "commandToExecute": "[concat('sh install_jumpbox.sh ', parameters('RemoteitUsername'),parameters('RemoteitPassword'))]"
+            "commandToExecute": "[concat('sh install-jumpbox.sh ', parameters('RemoteitUsername'),parameters('RemoteitPassword'))]"
           }
         }
       }
