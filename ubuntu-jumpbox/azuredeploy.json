@@ -264,7 +264,7 @@
             ]
           },
           "protectedSettings": {
-            "commandToExecute": "[concat('sh install-jumpbox.sh ', parameters('RemoteitUsername'),parameters('RemoteitPassword'))]"
+            "commandToExecute": "[concat('sh install-jumpbox.sh ', parameters('RemoteitUsername'),' ',parameters('RemoteitPassword'))]"
           }
         }
       }

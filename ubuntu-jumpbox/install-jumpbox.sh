@@ -13,8 +13,8 @@ install_node()
     if ! dpkg -s nodejs >/dev/null 2>&1; then
         logger "install node.js"
         curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
-        sudo apt-get install -y nodejs
-        sudo apt-get install -y build-essential
+        apt-get install -y nodejs
+        apt-get install -y build-essential
     else
         logger "nodejs already installed\n"           
         ret=1
@@ -23,16 +23,19 @@ install_node()
 }
 
 #update without prompt
+logger "do update"
 sudo apt-get -y update
 sudo apt-get -y upgrade 
+sleep 1
 
 #make a directory for the install
 #mkdir remoteit-desktop
 #cd remoteit-desktop
 
 #
+logger "try to install node"
 if [ !install_node ]; then
-    echo "node already installed\n"
+    logger "node already installed\n"
 fi
 
 # get and install Remoteit_CLI
@@ -58,7 +61,7 @@ touch /tmp/installdesktop
 touch /opt/t
 sudo cd /tmp
 sudo wget https://github.com/remoteit/desktop/releases/latest/download/remoteit-desktop-headless.tgz -O /tmp/remoteit-desktop-headless.tgz 
-sudo tar -xvzf /tmp/remoteit-desktop-headlesss.tgz
+sudo tar -xvzf /tmp/remoteit-desktop-headless.tgz -C /tmp
 sudo mv /tmp/package /opt/remoteit-desktop-headless
 
 
@@ -67,6 +70,7 @@ logger "Register Device with cli with user $username"
 touch /tmp/registercli
 sudo /usr/local/bin/remoteit login $username $password
 #register ssh and jumboxui
+sudo /usr/local/bin/remoteit setup
 sudo /usr/local/bin/remoteit add jumpboxui 29999 -t 7
 sudo /usr/local/bin/remoteit add ssh 22 -t 28 
 
