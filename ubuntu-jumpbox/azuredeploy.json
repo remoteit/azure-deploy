@@ -248,7 +248,7 @@
       {
         "type": "Microsoft.Compute/virtualMachines/extensions",
         "name": "[concat(parameters('RemoteitName'),'/newuserscript')]",
-        "apiVersion": "2019-07-01",
+        "apiVersion": "2015-06-15",
         "location": "[parameters('location')]",
         "dependsOn": [
           "[concat('Microsoft.Compute/virtualMachines/', parameters('RemoteitName'))]"
