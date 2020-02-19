@@ -14,7 +14,6 @@
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fremoteit%2Fazure-deploy%2Fmaster%2Fubuntu-jumpbox%2Fazuredeploy.json" target="_blank">
 <img src="https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.png"/>
 </a>
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https://raw.githubusercontent.com/remoteit/azure-deploy/master/ubuntu-jumpbox/azuredeploy.json" target="_blank"><img src="https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.png"/></a>
 
 <a href="http://armviz.io/#/?load=https://raw.githubusercontent.com/remoteit/azure-deploy/master/ubuntu-jumpbox/azuredeploy.json" target="_blank"><img src="https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/visualizebutton.png"/></a>
 
