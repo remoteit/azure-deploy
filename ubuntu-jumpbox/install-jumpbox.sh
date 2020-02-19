@@ -10,15 +10,15 @@ install_node()
 {
     local ret=0
 
-    if ! dpkg -s nodejs >/dev/null 2>&1; then
+  #  if ! dpkg -s nodejs >/dev/null 2>&1; then
         logger "install node.js"
         curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
         apt-get install -y nodejs
         apt-get install -y build-essential
-    else
-        logger "nodejs already installed\n"           
-        ret=1
-    fi
+  #  else
+  #      logger "nodejs already installed\n"           
+  #      ret=1
+  #  fi
     return $ret
 }
 
@@ -55,7 +55,7 @@ else
     echo "no hostname to set\n"
 fi
 
-# insstall desktop
+# install desktop
 logger "install desktop"
 touch /tmp/installdesktop
 touch /opt/t
@@ -70,7 +70,7 @@ logger "Register Device with cli with user $username"
 touch /tmp/registercli
 sudo /usr/local/bin/remoteit login $username $password
 #register ssh and jumboxui
-sudo /usr/local/bin/remoteit setup
+sudo /usr/local/bin/remoteit setup $HOSTNAME
 sudo /usr/local/bin/remoteit add jumpboxui 29999 -t 7
 sudo /usr/local/bin/remoteit add ssh 22 -t 28 
 
