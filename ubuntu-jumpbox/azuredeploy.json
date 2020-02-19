@@ -67,7 +67,7 @@
         "metadata": {
           "description": "Remote.it Password that belonge to Remote.it Username entered above."
         }
-      },            
+      }           
     },
     "variables": {
       "imagePublisher": "Canonical",
@@ -82,7 +82,7 @@
       "publicIPAddressType": "Dynamic",
       "vmStorageAccountContainerName": "vhds",
       "vmName": "MyUbuntuVM",
-      "vmSize": "Standard_B1s",
+      "vmSize": "Standard_B1",
       "virtualNetworkName": "MyVNET",
       "RemoteitUsername" : "replace-default",
       "RemoteitPassword" : "replace-default",
