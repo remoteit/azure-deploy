@@ -96,8 +96,8 @@ User=root
 Group=root
 Restart=always
 KillSignal=SIGQUIT
-WorkingDirectory=/opt/remoteit-desktop-headless/package
-ExecStart=/usr/bin/node /opt/remoteit-desktop-headless/package/build/index.js
+WorkingDirectory=/opt/remoteit-desktop-headless
+ExecStart=/usr/bin/node /opt/remoteit-desktop-headless/build/index.js
 StandardOutput=null
 
 [Install]
