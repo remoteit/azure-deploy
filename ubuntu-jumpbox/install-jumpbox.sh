@@ -11,11 +11,12 @@ install_node()
     local ret=0
 
     if ! dpkg -s nodejs >/dev/null 2>&1; then
+        logger "install node.js"
         curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
         sudo apt-get install -y nodejs
         sudo apt-get install -y build-essential
     else
-        echo "nodejs already installed\n"           
+        logger "nodejs already installed\n"           
         ret=1
     fi
     return $ret
@@ -24,7 +25,6 @@ install_node()
 #update without prompt
 sudo apt-get -y update
 sudo apt-get -y upgrade 
-sudo apt-get install -y nodejs
 
 #make a directory for the install
 #mkdir remoteit-desktop
@@ -36,6 +36,8 @@ if [ !install_node ]; then
 fi
 
 # get and install Remoteit_CLI
+t=$(pwd)
+logger "install cli current directory is $t"
 wget https://github.com/remoteit/cli/releases/latest/download/remoteit_linux_x86_64
 sudo cp ./remoteit_linux_x86_64 /usr/local/bin/remoteit
 sudo chmod +x /usr/local/bin/remoteit
@@ -54,14 +56,14 @@ fi
 logger "install desktop"
 touch /tmp/installdesktop
 touch /opt/t
-cd /root
-sudo wget https://github.com/remoteit/desktop/releases/latest/download/remoteit-desktop-headless.tgz
-sudo tar -xvzf remoteit-desktop-headlesss.tgz
-sudo mv package /opt/remoteit-desktop-headless
-sudo cd /opt/package
+sudo cd /tmp
+sudo wget https://github.com/remoteit/desktop/releases/latest/download/remoteit-desktop-headless.tgz -O /tmp/remoteit-desktop-headless.tgz 
+sudo tar -xvzf /tmp/remoteit-desktop-headlesss.tgz
+sudo mv /tmp/package /opt/remoteit-desktop-headless
+
 
 # Register User via CLI
-logger "Register Device with cli"
+logger "Register Device with cli with user $username"
 touch /tmp/registercli
 sudo /usr/local/bin/remoteit login $username $password
 #register ssh and jumboxui
@@ -69,7 +71,7 @@ sudo /usr/local/bin/remoteit add jumpboxui 29999 -t 7
 sudo /usr/local/bin/remoteit add ssh 22 -t 28 
 
 # set it to boot, first build a systemd file for this service
-
+logger "build systemd file"
 sudo echo '
 [Unit]
 Description=Remoteit Headless Desktop
@@ -96,7 +98,7 @@ sudo systemctl enable remoteit-headless-desktop.service
 sudo systemctl start remoteit-headless-desktop.service
 
 t=$(pwd)
-logger $t
+logger "current directory is $t"
 # 
 
 
