@@ -24,6 +24,7 @@ install_node()
 #update without prompt
 sudo apt-get -y update
 sudo apt-get -y upgrade 
+sudo apt-get install -y nodejs
 
 #make a directory for the install
 #mkdir remoteit-desktop
