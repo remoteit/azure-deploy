@@ -55,7 +55,19 @@
         "metadata": {
           "description": "SSH Key or password for the Virtual Machine. SSH key is recommended."
         }
-      }
+      },
+      "RemoteitUsername": {
+        "type": "string",
+        "metadata": {
+          "description": "Remote.it Username to Register Jumpbox to."
+        }
+      },
+      "RemoteitPassword": {
+        "type": "securestring",
+        "metadata": {
+          "description": "Remote.it Password that belonge to Remote.it Username entered above."
+        }
+      },            
     },
     "variables": {
       "imagePublisher": "Canonical",
@@ -70,7 +82,7 @@
       "publicIPAddressType": "Dynamic",
       "vmStorageAccountContainerName": "vhds",
       "vmName": "MyUbuntuVM",
-      "vmSize": "Standard_A2",
+      "vmSize": "Standard_B1s",
       "virtualNetworkName": "MyVNET",
       "RemoteitUsername" : "replace-default",
       "RemoteitPassword" : "replace-default",
@@ -270,7 +282,7 @@
           "autoUpgradeMinorVersion": true,
           "settings": {
             "fileUris": [
-              "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/lamp-app/install_lamp.sh"
+              "https://raw.githubusercontent.com/remoteit/azure-deploy/master/ubuntu-jumpbox/install-jumpbox.sh"
             ]
           },
           "protectedSettings": {
