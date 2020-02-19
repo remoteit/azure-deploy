@@ -53,6 +53,7 @@ if [ ${#hosthane} -ge 1 ]; then
 else
     logger "no hostname to set\n"
     echo "no hostname to set\n"
+    hostname=$HOSTNAME
 fi
 
 # install desktop
@@ -70,7 +71,7 @@ logger "Register Device with cli with user $username"
 touch /tmp/registercli
 sudo /usr/local/bin/remoteit login $username $password
 #register ssh and jumboxui
-sudo /usr/local/bin/remoteit setup $HOSTNAME
+sudo /usr/local/bin/remoteit setup $hostname
 sudo /usr/local/bin/remoteit add jumpboxui 29999 -t 7
 sudo /usr/local/bin/remoteit add ssh 22 -t 28 
 
