@@ -184,7 +184,7 @@
         }
       },
       {
-        "apiVersion": "2017-03-30",
+        "apiVersion": "2018-06-01",
         "type": "Microsoft.Compute/virtualMachines",
         "name": "[parameters('RemoteitDeviceName')]",
         "location": "[parameters('location')]",
@@ -211,7 +211,10 @@
             "osDisk": {
               "name": "[concat(parameters('RemoteitDeviceName'),'_OSDisk')]",
               "caching": "ReadWrite",
-              "createOption": "FromImage"
+              "createOption": "FromImage",
+              "managedDisk": {
+                "storageAccountType" : "StandardSSD_LRS"
+              }
             }
           },
           "networkProfile": {
@@ -226,7 +229,7 @@
       {
         "type": "Microsoft.Compute/virtualMachines/extensions",
         "name": "[concat(parameters('RemoteitDeviceName'),'/newuserscript')]",
-        "apiVersion": "2015-06-15",
+        "apiVersion": "2018-06-01",
         "location": "[parameters('location')]",
         "dependsOn": [
           "[concat('Microsoft.Compute/virtualMachines/', parameters('RemoteitDeviceName'))]"
