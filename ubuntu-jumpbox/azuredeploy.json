@@ -103,7 +103,7 @@
         "properties": {
           "publicIPAllocationMethod": "[variables('publicIPAddressType')]",
           "dnsSettings": {
-            "domainNameLabel": "[concat(parameters('dnsLabelPrefix'),'-',uniqueString(resourceGroup().id))]"
+            "domainNameLabel": "[concat(parameters('dnsLabelPrefix'),'-',uniqueString(resourceGroup().name))]"
           }
         }
       },
