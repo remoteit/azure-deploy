@@ -59,7 +59,7 @@
     },
     "variables": {
       "imagePublisher": "Canonical",
-      "imageOffer": "0001-com-ubuntu-server-focal",
+      "imageOffer": "0001-com-ubuntu-server-focal",      
       "ubuntuOSVersion": "20_04-lts",
       "nicName": "[concat(variables('vmName'),'-nic')]",
       "addressPrefix": "10.0.0.0/16",
@@ -174,7 +174,7 @@
         }
       },
       {
-        "apiVersion": "2018-06-01",
+        "apiVersion": "2019-07-01",
         "type": "Microsoft.Compute/virtualMachines",
         "name": "[parameters('RemoteitDeviceName')]",
         "location": "[parameters('location')]",
