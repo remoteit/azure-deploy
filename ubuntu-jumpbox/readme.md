@@ -1,4 +1,4 @@
-# Deploy a remote.it proxy server on Ubuntu.
+# Deploy remoteit on a Ubuntu instance on your Azure account 
 
 <!--
 <IMG SRC="https://azurequickstartsservice.blob.core.windows.net/badges/lamp-app/PublicLastTestDate.svg" />&nbsp;
