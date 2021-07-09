@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Headless Desktop for Ubuntu with cli registration
+# Headless Desktop for Ubuntu x86_64 with cli registration
 #
 username=$1
 password=$2
@@ -49,7 +49,7 @@ fi
 # get and install Remoteit_CLI
 t=$(pwd)
 logger "install cli current directory is $t"
-wget https://github.com/remoteit/cli/releases/latest/download/remoteit_linux_x86_64
+wget https://downloads.remote.it/cli/latest/remoteit_linux_x86_64
 sudo cp ./remoteit_linux_x86_64 /usr/local/bin/remoteit
 sudo chmod +x /usr/local/bin/remoteit
 
@@ -69,7 +69,8 @@ logger "install desktop"
 touch /tmp/installdesktop
 touch /opt/t
 sudo cd /tmp
-sudo wget https://github.com/remoteit/desktop/releases/latest/download/remoteit-desktop-headless.tgz -O /tmp/remoteit-desktop-headless.tgz 
+#sudo wget https://github.com/remoteit/desktop/releases/latest/download/remoteit-desktop-headless.tgz -O /tmp/remoteit-desktop-headless.tgz 
+sudo wget https://downloads.remote.it/desktop/latest/remoteit-headless.tgz -O /tmp/remoteit-desktop-headless.tgz 
 sudo tar -xvzf /tmp/remoteit-desktop-headless.tgz -C /tmp
 sudo mv /tmp/package /opt/remoteit-desktop-headless
 
@@ -77,38 +78,50 @@ sudo mv /tmp/package /opt/remoteit-desktop-headless
 # Register User via CLI
 logger "Register Device with cli with user $username"
 touch /tmp/registercli
-sudo /usr/local/bin/remoteit login $username $password
+#
+# install agent
+sudo /usr/local/bin/remoteit agent install
+#remoteit run -verbose -config /etc/remoteit/config.json &    // for docker
+
+#sudo /usr/local/bin/remoteit login $username $password
+sudo /usr/local/bin/remoteit signin --user $username --password $password
 #register ssh and jumboxui
-sudo /usr/local/bin/remoteit setup $hostname
-sudo /usr/local/bin/remoteit add jumpboxui 29999 -t 7
-sudo /usr/local/bin/remoteit add ssh 22 -t 28 
+#sudo /usr/local/bin/remoteit setup $hostname
+sudo /usr/local/bin/remoteit register --name $hostname
+#
+sudo /usr/local/bin/remoteit add -name jumpboxui  -type 7 -port 29999 -hostname 127.0.0.1
+#sudo /usr/local/bin/remoteit add jumpboxui 29999 -t 7
+#sudo /usr/local/bin/remoteit add ssh 22 -t 28 
 
+#
+# No longer needed since we do remote agent install
+#
 # set it to boot, first build a systemd file for this service
-logger "build systemd file"
-sudo echo '
-[Unit]
-Description=Remoteit Headless Desktop
-After=network.target
+#logger "build systemd file"
+#sudo echo '
+#[Unit]
+#Description=Remoteit Headless Desktop
+#After=network.target
+#
+#[Service]
+#PIDFile=/tmp/remotit-headless-desktop-99.pid
+#User=root
+#Group=root
+#Restart=always
+#KillSignal=SIGQUIT
+#WorkingDirectory=/opt/remoteit-desktop-headless
+#ExecStart=/usr/bin/node /opt/remoteit-desktop-headless/build/index.js
+#StandardOutput=null
 
-[Service]
-PIDFile=/tmp/remotit-headless-desktop-99.pid
-User=root
-Group=root
-Restart=always
-KillSignal=SIGQUIT
-WorkingDirectory=/opt/remoteit-desktop-headless
-ExecStart=/usr/bin/node /opt/remoteit-desktop-headless/build/index.js
-StandardOutput=null
-
-[Install]
-WantedBy=multi-user.target
-
-' > remoteit-headless-desktop.service
+#[Install]
+#WantedBy=multi-user.target
+#
+#' > remoteit-headless-desktop.service
 
 # install it, enable it and activate it
-cp remoteit-headless-desktop.service /etc/systemd/system/remoteit-headless-desktop.service
-sudo systemctl enable remoteit-headless-desktop.service
-sudo systemctl start remoteit-headless-desktop.service
+#cp remoteit-headless-desktop.service /etc/systemd/system/remoteit-headless-desktop.service
+#sudo systemctl enable remoteit-headless-desktop.service
+#sudo systemctl start remoteit-headless-desktop.service
 
 t=$(pwd)
 logger "current directory is $t"
