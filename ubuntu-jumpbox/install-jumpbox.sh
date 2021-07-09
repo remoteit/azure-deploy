@@ -7,7 +7,7 @@ password=$2
 hostname=$3
 
 logger "username $username"
-logger "pw $password"
+#logger "pw $password"
 logger "hostname $hostname"
 
 install_node()
@@ -84,10 +84,10 @@ sudo /usr/local/bin/remoteit agent install
 #remoteit run -verbose -config /etc/remoteit/config.json &    // for docker
 
 #sudo /usr/local/bin/remoteit login $username $password
-sudo /usr/local/bin/remoteit signin --user $username --password $password
+sudo /usr/local/bin/remoteit signin -user $username -password $password
 #register ssh and jumboxui
 #sudo /usr/local/bin/remoteit setup $hostname
-sudo /usr/local/bin/remoteit register --name $hostname
+sudo /usr/local/bin/remoteit register -name $hostname
 #
 sudo /usr/local/bin/remoteit add -name jumpboxui  -type 7 -port 29999 -hostname 127.0.0.1
 #sudo /usr/local/bin/remoteit add jumpboxui 29999 -t 7
