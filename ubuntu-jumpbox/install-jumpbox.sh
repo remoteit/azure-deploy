@@ -84,7 +84,7 @@ sudo /usr/local/bin/remoteit agent install
 #remoteit run -verbose -config /etc/remoteit/config.json &    // for docker
 
 #sudo /usr/local/bin/remoteit login $username $password
-sudo /usr/local/bin/remoteit signin -user $username -password $password
+sudo /usr/local/bin/remoteit signin -user $username -pass $password
 #register ssh and jumboxui
 #sudo /usr/local/bin/remoteit setup $hostname
 sudo /usr/local/bin/remoteit register -name $hostname
