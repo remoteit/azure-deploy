@@ -70,7 +70,7 @@
     },
     "variables": {
       "imagePublisher": "Canonical",
-      "imageOffer": "UbuntuServer",
+      "imageOffer": "0001-com-ubuntu-server-focal",
       "nicName": "[concat(variables('vmName'),'-nic')]",
       "addressPrefix": "10.0.0.0/16",
       "subnetName": "Subnet",
