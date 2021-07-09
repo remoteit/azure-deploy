@@ -123,7 +123,7 @@ WantedBy=multi-user.target
 ' > remoteit-headless-desktop.service
 
 # install it, enable it and activate it
-cp remoteit-headless-desktop.service /etc/systemd/system/remoteit-headless-desktop.service
+sudo cp remoteit-headless-desktop.service /etc/systemd/system/remoteit-headless-desktop.service
 sudo systemctl enable remoteit-headless-desktop.service
 sudo systemctl start remoteit-headless-desktop.service
 #-----------
