@@ -81,6 +81,8 @@ touch /tmp/registercli
 #
 # install agent
 sudo /usr/local/bin/remoteit agent install
+
+#for docker:
 #remoteit run -verbose -config /etc/remoteit/config.json &    // for docker
 
 #sudo /usr/local/bin/remoteit login $username $password
@@ -89,39 +91,48 @@ sudo /usr/local/bin/remoteit signin -user $username -pass $password
 #sudo /usr/local/bin/remoteit setup $hostname
 sudo /usr/local/bin/remoteit register -name $hostname
 #
+# register only jumpbox gui
 sudo /usr/local/bin/remoteit add -name jumpboxui  -type 7 -port 29999 -hostname 127.0.0.1
 #sudo /usr/local/bin/remoteit add jumpboxui 29999 -t 7
 #sudo /usr/local/bin/remoteit add ssh 22 -t 28 
 
 #
-# No longer needed since we do remote agent install
-#
-# set it to boot, first build a systemd file for this service
-#logger "build systemd file"
-#sudo echo '
-#[Unit]
-#Description=Remoteit Headless Desktop
-#After=network.target
-#
-#[Service]
-#PIDFile=/tmp/remotit-headless-desktop-99.pid
-#User=root
-#Group=root
-#Restart=always
-#KillSignal=SIGQUIT
-#WorkingDirectory=/opt/remoteit-desktop-headless
-#ExecStart=/usr/bin/node /opt/remoteit-desktop-headless/build/index.js
-#StandardOutput=null
+# IF not docker install the debian init script
 
-#[Install]
-#WantedBy=multi-user.target
-#
-#' > remoteit-headless-desktop.service
+#--------------
+# set it to boot, first build a systemd file for this service
+logger "build systemd file"
+sudo echo '
+[Unit]
+Description=Remoteit Headless Desktop
+After=network.target
+
+[Service]
+PIDFile=/tmp/remotit-headless-desktop-99.pid
+User=root
+Group=root
+Restart=always
+KillSignal=SIGQUIT
+WorkingDirectory=/opt/remoteit-desktop-headless
+ExecStart=/usr/bin/node /opt/remoteit-desktop-headless/build/index.js
+StandardOutput=null
+
+[Install]
+WantedBy=multi-user.target
+
+' > remoteit-headless-desktop.service
 
 # install it, enable it and activate it
-#cp remoteit-headless-desktop.service /etc/systemd/system/remoteit-headless-desktop.service
-#sudo systemctl enable remoteit-headless-desktop.service
-#sudo systemctl start remoteit-headless-desktop.service
+cp remoteit-headless-desktop.service /etc/systemd/system/remoteit-headless-desktop.service
+sudo systemctl enable remoteit-headless-desktop.service
+sudo systemctl start remoteit-headless-desktop.service
+#-----------
+
+# if docker just startup the headless destkop
+#
+#cd /opt/remoteit-desktop-headless/
+#/usr/bin/node /opt/remoteit-desktop-headless/build/index.js
+
 
 t=$(pwd)
 logger "current directory is $t"
